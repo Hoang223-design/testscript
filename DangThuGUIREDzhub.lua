@@ -8,11 +8,11 @@ local Window = Library:MakeWindow({
         Animation = "Cre: NgọcHoàng20?👑"
     },
     Key = {
-        KeySystem = false,
+        KeySystem = true,
         Title = "Nhập key để tiếp tục🌚🥵",
         Description = "Được Tạo Bởi: Huỳnh Ngọc Hoàng👑",
         KeyLink = "Link key không tồn tại muốn sở hữu được key thì phải nhắn admin script!",
-        Keys = {"1"},
+        Keys = {"Hoangtesting"},
         Notifi = {
             Notifications = true,
             CorrectKey = "Script Đang Chạy🥵!",
@@ -36,12 +36,12 @@ Library:MinimizeButton({
 ------ Tab
 local Tab1o = Library:MakeTab({Name = "Nhạc🥁🎷", Window = Window})
 local Tab2o = Library:MakeTab({Name = "Main👉🏻👈🏻", Window = Window})
-local Tab3o = Library:MakeTab({Name = "Auto Nhặt Trái🤤🍑", Window = Window})
-local Tab4o = Library:MakeTab({Name = "Aimbot:)🥵", Window = Window})
-local Tab5o = Library:MakeTab({Name = "Giảm Lag☘️", Window = Window})
-local Tab6o = Library:MakeTab({Name = "Kaitun🐢", Window = Window})
-local Tab7o = Library:MakeTab({Name = "Dịch Chuyển🛸", Window = Window})
-local Tab8o = Library:MakeTab({Name = "Auto Farm 🌾", Window = Window})
+local Tab3o = Library:MakeTab({Name = "Auto Farm 🌾", Window = Window})
+local Tab4o = Library:MakeTab({Name = "Trái cây/Raid🤤🍑", Window = Window})
+local Tab5o = Library:MakeTab({Name = "Pvp🥵", Window = Window})
+local Tab6o = Library:MakeTab({Name = "Giảm Lag☘️", Window = Window})
+local Tab7o = Library:MakeTab({Name = "tunkai🐢", Window = Window})
+local Tab8o = Library:MakeTab({Name = "Dịch Chuyển🛸", Window = Window})
 
 ------- BUTTON
 local currentSound = nil
@@ -137,27 +137,27 @@ Library:AddButton(Tab2o, {
     end
 })
 
-Library:AddButton(Tab3o, {
-    Name = "auto Nhặt 🍑🤤",
+Library:AddButton(Tab4o, {
+    Name = "Nhặt trái đổi server 🍑🤤",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/marisdeptrai/Script-Free/main/FruitFinder.lua"))()
     end
 })
 
-Library:AddButton(Tab4o, {
+Library:AddButton(Tab5o, {
     Name = "sắp có😍 !!",
     Callback = function()
     end
 })
 
-Library:AddButton(Tab5o, {
+Library:AddButton(Tab6o, {
     Name = "dành cho máy yếu💥 x3",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
     end
 })
 
-Library:AddButton(Tab6o, {
+Library:AddButton(Tab7o, {
     Name = "Kaitun simple",
     Callback = function()
         getgenv().simple_settings = {
@@ -178,7 +178,7 @@ Library:AddButton(Tab6o, {
     end
 })
 
--- Tab7: Bay đến đảo và Dịch chuyển thông minh
+-- Tab8: Bay đến đảo và Dịch chuyển thông minh
 local flySpeed = 175
 local flyHeight = 75
 local flying = false
@@ -306,8 +306,8 @@ local function SmartTeleport(targetCFrame)
     startFly(targetCFrame)
 end
 
--- Thêm khoảng cách và sắp xếp lại Tab7
-Library:AddDropdown(Tab7o, {
+-- Thêm khoảng cách và sắp xếp lại Tab8
+Library:AddDropdown(Tab8o, {
     Name = "Chọn đảo cần tới🏞️",
     Default = "Chọn đảo🏜️",
     Options = (function()
@@ -338,11 +338,11 @@ Library:AddDropdown(Tab7o, {
 
 -- Thêm khoảng cách bằng cách thêm một frame rỗng
 local spacer = Instance.new("Frame")
-spacer.Parent = Tab7o
+spacer.Parent = Tab8o
 spacer.Size = UDim2.new(1, -20, 0, 10)
 spacer.BackgroundTransparency = 1
 
-Library:AddButton(Tab7o, {Name = "Dừng Tele🐧", Callback = function()
+Library:AddButton(Tab8o, {Name = "Dừng Tele🐧", Callback = function()
     if flying then
         stopFly()
         game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đã dừng dịch chuyển!", Duration = 5})
@@ -351,7 +351,7 @@ Library:AddButton(Tab7o, {Name = "Dừng Tele🐧", Callback = function()
     end
 end})
 
-Library:AddButton(Tab7o, {Name = "🌲🌲Sea 1🛸", Callback = function()
+Library:AddButton(Tab8o, {Name = "🌲🌲Sea 1🛸", Callback = function()
     local currentSea = GetCurrentSea()
     if currentSea ~= 1 then
         if currentSea == 3 then TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1) end
@@ -360,7 +360,7 @@ Library:AddButton(Tab7o, {Name = "🌲🌲Sea 1🛸", Callback = function()
     game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 1!", Duration = 5})
 end})
 
-Library:AddButton(Tab7o, {Name = "🌲☕Sea 2🛸", Callback = function()
+Library:AddButton(Tab8o, {Name = "🌲☕Sea 2🛸", Callback = function()
     local currentSea = GetCurrentSea()
     if currentSea ~= 2 then
         if currentSea == 3 then TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1) end
@@ -369,7 +369,7 @@ Library:AddButton(Tab7o, {Name = "🌲☕Sea 2🛸", Callback = function()
     game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 2!", Duration = 5})
 end})
 
-Library:AddButton(Tab7o, {Name = "🐢Sea 3🛸", Callback = function()
+Library:AddButton(Tab8o, {Name = "🐢Sea 3🛸", Callback = function()
     local currentSea = GetCurrentSea()
     if currentSea ~= 3 then
         TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1)
@@ -378,7 +378,7 @@ Library:AddButton(Tab7o, {Name = "🐢Sea 3🛸", Callback = function()
     game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 3!", Duration = 5})
 end})
 
--- Tab 8: Auto Farm 🌾 (tối ưu hiệu suất và giao diện)
+-- Tab 3: Auto Farm 🌾 (tối ưu hiệu suất và giao diện)
 local autoFarmLevelEnabled = false
 local autoFarmChestsEnabled = false
 local farmType = "Level"
@@ -468,8 +468,8 @@ local function autoFarmChests()
     end
 end
 
-Library:AddToggle(Tab8o, {
-    Name = "Auto Farm Level 🌟",
+Library:AddToggle(Tab3o, {
+    Name = "Tự động cày cấp 🌟",
     Default = false,
     Callback = function(state)
         autoFarmLevelEnabled = state
@@ -482,7 +482,7 @@ Library:AddToggle(Tab8o, {
     end
 })
 
-Library:AddToggle(Tab8o, {
+Library:AddToggle(Tab3o, {
     Name = "Auto Farm Chests 💰",
     Default = false,
     Callback = function(state)
@@ -496,7 +496,7 @@ Library:AddToggle(Tab8o, {
     end
 })
 
-Library:AddDropdown(Tab8o, {
+Library:AddDropdown(Tab3o, {
     Name = "Chọn loại farm 🌾",
     Default = "Level",
     Options = {"Level", "Chests"},
@@ -506,7 +506,7 @@ Library:AddDropdown(Tab8o, {
     end
 })
 
-Library:AddSlider(Tab8o, {
+Library:AddSlider(Tab3o, {
     Name = "Tốc độ farm ⏩ [giây]",
     Min = 0.1,
     Max = 1,
