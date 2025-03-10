@@ -22,11 +22,11 @@ local Window = Library:MakeWindow({
     }
 })
 
--- Nút Minimize và Close (đã được điều chỉnh kích thước trong RedzHubGUI.lua)
+-- Nút Minimize và Close (đã được điều chỉnh nằm ngoài GUI)
 Library:MinimizeButton({
     Image = "http://www.roblox.com/asset/?id=136495663671275",
-    Size = {30, 30}, -- Đặt kích thước 30x30 để giống Redz Hub
-    Color = Color3.fromRGB(70, 20, 20), -- Màu đỏ đậm giống Redz Hub
+    Size = {30, 30},
+    Color = Color3.fromRGB(70, 20, 20),
     Corner = true,
     Stroke = false,
     StrokeColor = Color3.fromRGB(255, 0, 0),
@@ -41,7 +41,7 @@ local Tab4o = Library:MakeTab({Name = "Aimbot:)🥵", Window = Window})
 local Tab5o = Library:MakeTab({Name = "Giảm Lag☘️", Window = Window})
 local Tab6o = Library:MakeTab({Name = "Kaitun🐢", Window = Window})
 local Tab7o = Library:MakeTab({Name = "Dịch Chuyển🛸", Window = Window})
-local Tab8o = Library:MakeTab({Name = "Auto Farm 🌾", Window = Window}) -- Tab mới cho Auto Farm
+local Tab8o = Library:MakeTab({Name = "Auto Farm 🌾", Window = Window})
 
 ------- BUTTON
 local currentSound = nil
@@ -54,7 +54,6 @@ Library:AddToggle(Tab1o, {
             currentSound:Stop()
             currentSound = nil
         end
-        
         if state then
             local sound = Instance.new("Sound")
             sound.Name = "ChipiMusic"
@@ -64,7 +63,6 @@ Library:AddToggle(Tab1o, {
             sound.Looped = true
             sound:Play()
             currentSound = sound
-            
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Thông báo!",
                 Text = "Đã bật nhạc Chipi chipi chapa😼!",
@@ -82,7 +80,6 @@ Library:AddToggle(Tab1o, {
             currentSound:Stop()
             currentSound = nil
         end
-        
         if state then
             local sound = Instance.new("Sound")
             sound.Name = "MoneyRainMusic"
@@ -92,7 +89,6 @@ Library:AddToggle(Tab1o, {
             sound.Looped = true
             sound:Play()
             currentSound = sound
-            
             game.StarterGui:SetCore("SendNotification", {
                 Title = "Thông báo🔊!",
                 Text = "🥵Đã bật nhạc Money Rain🥵!",
@@ -102,14 +98,10 @@ Library:AddToggle(Tab1o, {
     end
 })
 
--- Tab2o chỉ giữ các button
 Library:AddButton(Tab2o, {
     Name = "🩸z",
     Callback = function()
-        local Settings = {
-            JoinTeam = "Pirates",
-            Translator = true,
-        }
+        local Settings = {JoinTeam = "Pirates", Translator = true}
         loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))(Settings)
     end
 })
@@ -169,40 +161,26 @@ Library:AddButton(Tab6o, {
     Name = "Kaitun simple",
     Callback = function()
         getgenv().simple_settings = {
-            ["MASTERY"] = {
-                ["ACTIVE"] = true,
-                ["METHOD"] = "Half",
-            },
+            ["MASTERY"] = {["ACTIVE"] = true, ["METHOD"] = "Half"},
             ["OBJECTIVE"] = {
-                ["GODHUMAN"] = true,
-                ["RACE-V3"] = true,
-                ["FRAGMENT"] = 100000,
-                ["CANVANDER"] = true,
-                ["BUDDY-SWORD"] = true,
-                ["CURSED-DUAL-KATANA"] = true,
-                ["SHARK-ANCHOR"] = true,
-                ["ACIDUM-RIFLE"] = true,
-                ["VENOM-BOW"] = true,
-                ["SOUL-GUITAR"] = true,
+                ["GODHUMAN"] = true, ["RACE-V3"] = true, ["FRAGMENT"] = 100000,
+                ["CANVANDER"] = true, ["BUDDY-SWORD"] = true, ["CURSED-DUAL-KATANA"] = true,
+                ["SHARK-ANCHOR"] = true, ["ACIDUM-RIFLE"] = true, ["VENOM-BOW"] = true, ["SOUL-GUITAR"] = true
             },
             ["FRUITPURCHASE"] = true,
             ["PRIORITYFRUIT"] = {
-                [1] = "Dragon-Dragon",
-                [2] = "Flame-Flame",
-                [3] = "Rumble-Rumble",
-                [4] = "Human-Human: Buddha",
-                [5] = "Dark-Dark",
+                [1] = "Dragon-Dragon", [2] = "Flame-Flame", [3] = "Rumble-Rumble",
+                [4] = "Human-Human: Buddha", [5] = "Dark-Dark"
             },
-            ["FPSCAP"] = 30,
-            ["LOWTEXTURE"] = true
+            ["FPSCAP"] = 30, ["LOWTEXTURE"] = true
         }
         loadstring(game:HttpGet("https://raw.githubusercontent.com/simple-hubs/contents/refs/heads/main/bloxfruit-kaitan-main.lua"))()
     end
 })
 
 -- Tab7: Bay đến đảo và Dịch chuyển thông minh
-local flySpeed = 175 -- Tốc độ bay
-local flyHeight = 75 -- Độ cao bay
+local flySpeed = 175
+local flyHeight = 75
 local flying = false
 local bodyVelocity, bodyGyro
 
@@ -225,31 +203,24 @@ local function startFly(targetCFrame)
     
     spawn(function()
         local startPos = rootPart.Position
-        local endPos = targetCFrame.Position + Vector3.new(0, flyHeight, 0) -- Bay cao hơn
+        local endPos = targetCFrame.Position + Vector3.new(0, flyHeight, 0)
         
         while flying do
             local currentPos = rootPart.Position
             local distanceToTarget = (currentPos - endPos).Magnitude
-            
-            -- Dừng lại khi gần đích (khoảng cách < 3)
             if distanceToTarget < 2 then
                 rootPart.CFrame = CFrame.new(endPos, targetCFrame.Position)
                 stopFly()
                 break
             end
-            
-            -- Điều chỉnh tốc độ khi gần đích
             local adjustedSpeed = flySpeed
             if distanceToTarget < 50 then
-                adjustedSpeed = math.max(flySpeed * (distanceToTarget / 50), 10) -- Giảm tốc độ dần
+                adjustedSpeed = math.max(flySpeed * (distanceToTarget / 50), 10)
             end
-            
-            -- Di chuyển về đích
             local direction = (endPos - currentPos).Unit
             bodyVelocity.Velocity = direction * adjustedSpeed
             bodyGyro.CFrame = CFrame.lookAt(currentPos, endPos)
-            
-            wait(0.03) -- Tăng tần suất cập nhật để chính xác hơn
+            wait(0.03)
         end
     end)
 end
@@ -270,13 +241,9 @@ end
 local function GetCurrentSea()
     local player = game.Players.LocalPlayer
     local level = player.Data.Level.Value
-    if level < 700 then
-        return 1 -- Sea 1
-    elseif level < 1500 then
-        return 2 -- Sea 2
-    else
-        return 3 -- Sea 3
-    end
+    if level < 700 then return 1
+    elseif level < 1500 then return 2
+    else return 3 end
 end
 
 local Sea1Locations = {
@@ -325,60 +292,43 @@ local function SmartTeleport(targetCFrame)
     local player = game.Players.LocalPlayer
     local currentSea = GetCurrentSea()
     local targetSea = nil
-    
-    -- Xác định Sea của đích đến
-    for _, loc in pairs(Sea1Locations) do
-        if loc[2] == targetCFrame then targetSea = 1 break end
-    end
-    for _, loc in pairs(Sea2Locations) do
-        if loc[2] == targetCFrame then targetSea = 2 break end
-    end
-    for _, loc in pairs(Sea3Locations) do
-        if loc[2] == targetCFrame then targetSea = 3 break end
-    end
+    for _, loc in pairs(Sea1Locations) do if loc[2] == targetCFrame then targetSea = 1 break end end
+    for _, loc in pairs(Sea2Locations) do if loc[2] == targetCFrame then targetSea = 2 break end end
+    for _, loc in pairs(Sea3Locations) do if loc[2] == targetCFrame then targetSea = 3 break end end
     
     if targetSea and currentSea ~= targetSea then
-        -- Dịch chuyển qua cổng ở Sea 3
         if currentSea == 3 or targetSea == 3 then
-            local portalPos = CFrame.new(-5000, 314, -3000) -- Castle on the Sea (cổng chính)
+            local portalPos = CFrame.new(-5000, 314, -3000)
             TeleportTo(portalPos)
-            wait(1) -- Đợi để qua cổng
+            wait(1)
         end
     end
-    
-    -- Bay đến đích
     startFly(targetCFrame)
 end
 
+-- Thêm khoảng cách và sắp xếp lại Tab7
 Library:AddDropdown(Tab7o, {
     Name = "Chọn đảo cần tới🏞️",
     Default = "Chọn đảo🏜️",
     Options = (function()
         local currentSea = GetCurrentSea()
-        if currentSea == 1 then
-            return {"Windmill Village", "Marine Start", "Middle Town", "Jungle", "Pirate Village", "Desert",
-                    "Frozen Village", "Marine Fortress", "Skypiea", "Prison", "Colosseum", "Magma Village",
-                    "Underwater City", "Fountain City"}
-        elseif currentSea == 2 then
-            return {"Cafe", "Kingdom of Rose", "Green Zone", "Graveyard", "Snow Mountain", "Hot and Cold",
-                    "Cursed Ship", "Ice Castle", "Forgotten Island", "Dark Arena", "Usoap Island"}
-        else
-            return {"Port Town", "Hydra Island", "Great Tree", "Floating Turtle", "Castle on the Sea",
-                    "Haunted Castle", "Sea of Treats", "Tiki Outpost"}
-        end
+        if currentSea == 1 then return {"Windmill Village", "Marine Start", "Middle Town", "Jungle", "Pirate Village", "Desert",
+                "Frozen Village", "Marine Fortress", "Skypiea", "Prison", "Colosseum", "Magma Village",
+                "Underwater City", "Fountain City"}
+        elseif currentSea == 2 then return {"Cafe", "Kingdom of Rose", "Green Zone", "Graveyard", "Snow Mountain", "Hot and Cold",
+                "Cursed Ship", "Ice Castle", "Forgotten Island", "Dark Arena", "Usoap Island"}
+        else return {"Port Town", "Hydra Island", "Great Tree", "Floating Turtle", "Castle on the Sea",
+                "Haunted Castle", "Sea of Treats", "Tiki Outpost"} end
     end)(),
     Callback = function(value)
         local currentSea = GetCurrentSea()
         local locations = (currentSea == 1 and Sea1Locations) or (currentSea == 2 and Sea2Locations) or Sea3Locations
-        
         for _, loc in pairs(locations) do
             if loc[1] == value then
                 if flying then stopFly() end
                 SmartTeleport(loc[2])
                 game.StarterGui:SetCore("SendNotification", {
-                    Title = "Thông báo🔊!",
-                    Text = "Đang dịch chuyển " .. value .. "!",
-                    Duration = 5
+                    Title = "Thông báo🔊!", Text = "Đang dịch chuyển " .. value .. "!", Duration = 5
                 })
                 break
             end
@@ -386,98 +336,62 @@ Library:AddDropdown(Tab7o, {
     end
 })
 
-Library:AddButton(Tab7o, {
-    Name = "Dừng Tele🐧",
-    Callback = function()
-        if flying then
-            stopFly()
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Thông báo🔊!",
-                Text = "Đã dừng dịch chuyển!",
-                Duration = 5
-            })
-        else
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Thông báo🔊!",
-                Text = "Không có dịch chuyển nào đang hoạt động!",
-                Duration = 5
-            })
-        end
-    end
-})
+-- Thêm khoảng cách bằng cách thêm một frame rỗng
+local spacer = Instance.new("Frame")
+spacer.Parent = Tab7o
+spacer.Size = UDim2.new(1, -20, 0, 10)
+spacer.BackgroundTransparency = 1
 
-Library:AddButton(Tab7o, {
-    Name = "🌲🌲Sea 1🛸",
-    Callback = function()
-        local currentSea = GetCurrentSea()
-        if currentSea ~= 1 then
-            if currentSea == 3 then
-                TeleportTo(CFrame.new(-5000, 314, -3000)) -- Castle on the Sea
-                wait(1)
-            end
-            TeleportTo(CFrame.new(979, 16, 1200)) -- Windmill Village
-        end
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Thông báo🔊!",
-            Text = "Đang dịch chuyển đến Sea 1!",
-            Duration = 5
-        })
+Library:AddButton(Tab7o, {Name = "Dừng Tele🐧", Callback = function()
+    if flying then
+        stopFly()
+        game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đã dừng dịch chuyển!", Duration = 5})
+    else
+        game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Không có dịch chuyển nào đang hoạt động!", Duration = 5})
     end
-})
+end})
 
-Library:AddButton(Tab7o, {
-    Name = "🌲☕Sea 2🛸",
-    Callback = function()
-        local currentSea = GetCurrentSea()
-        if currentSea ~= 2 then
-            if currentSea == 3 then
-                TeleportTo(CFrame.new(-5000, 314, -3000)) -- Castle on the Sea
-                wait(1)
-            end
-            TeleportTo(CFrame.new(-380, 77, 255)) -- Cafe
-        end
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Thông báo🔊!",
-            Text = "Đang dịch chuyển đến Sea 2!",
-            Duration = 5
-        })
+Library:AddButton(Tab7o, {Name = "🌲🌲Sea 1🛸", Callback = function()
+    local currentSea = GetCurrentSea()
+    if currentSea ~= 1 then
+        if currentSea == 3 then TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1) end
+        TeleportTo(CFrame.new(979, 16, 1200))
     end
-})
+    game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 1!", Duration = 5})
+end})
 
-Library:AddButton(Tab7o, {
-    Name = "🐢Sea 3🛸",
-    Callback = function()
-        local currentSea = GetCurrentSea()
-        if currentSea ~= 3 then
-            TeleportTo(CFrame.new(-5000, 314, -3000)) -- Castle on the Sea
-            wait(1)
-        end
-        TeleportTo(CFrame.new(-950, 15, 5500)) -- Port Town
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Thông báo🔊!",
-            Text = "Đang dịch chuyển đến Sea 3!",
-            Duration = 5
-        })
+Library:AddButton(Tab7o, {Name = "🌲☕Sea 2🛸", Callback = function()
+    local currentSea = GetCurrentSea()
+    if currentSea ~= 2 then
+        if currentSea == 3 then TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1) end
+        TeleportTo(CFrame.new(-380, 77, 255))
     end
-})
+    game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 2!", Duration = 5})
+end})
 
--- Tab 8: Auto Farm 🌾
+Library:AddButton(Tab7o, {Name = "🐢Sea 3🛸", Callback = function()
+    local currentSea = GetCurrentSea()
+    if currentSea ~= 3 then
+        TeleportTo(CFrame.new(-5000, 314, -3000)) wait(1)
+    end
+    TeleportTo(CFrame.new(-950, 15, 5500))
+    game.StarterGui:SetCore("SendNotification", {Title = "Thông báo🔊!", Text = "Đang dịch chuyển đến Sea 3!", Duration = 5})
+end})
+
+-- Tab 8: Auto Farm 🌾 (tối ưu hiệu suất và giao diện)
 local autoFarmLevelEnabled = false
 local autoFarmChestsEnabled = false
 local farmType = "Level"
-local farmSpeed = 0.5 -- Thời gian chờ giữa các lần farm (mặc định 0.5 giây)
+local farmSpeed = 0.5
 
--- Hàm tìm quái gần nhất để farm level
 local function findNearestEnemy()
     local player = game.Players.LocalPlayer
     local character = player.Character
     if not character or not character:FindFirstChild("HumanoidRootPart") then return nil end
-    
     local rootPart = character.HumanoidRootPart
     local enemies = game.Workspace.Enemies:GetChildren()
     local nearestEnemy = nil
     local minDistance = math.huge
-    
     for _, enemy in pairs(enemies) do
         if enemy:FindFirstChild("Humanoid") and enemy:FindFirstChild("HumanoidRootPart") and enemy.Humanoid.Health > 0 then
             local distance = (rootPart.Position - enemy.HumanoidRootPart.Position).Magnitude
@@ -487,21 +401,17 @@ local function findNearestEnemy()
             end
         end
     end
-    
     return nearestEnemy
 end
 
--- Hàm tìm chest gần nhất để farm
 local function findNearestChest()
     local player = game.Players.LocalPlayer
     local character = player.Character
     if not character or not character:FindFirstChild("HumanoidRootPart") then return nil end
-    
     local rootPart = character.HumanoidRootPart
     local chests = game.Workspace:GetChildren()
     local nearestChest = nil
     local minDistance = math.huge
-    
     for _, obj in pairs(chests) do
         if obj.Name:match("Chest") and obj:IsA("BasePart") then
             local distance = (rootPart.Position - obj.Position).Magnitude
@@ -511,155 +421,91 @@ local function findNearestChest()
             end
         end
     end
-    
     return nearestChest
 end
 
--- Hàm auto farm level
 local function autoFarmLevel()
     while autoFarmLevelEnabled and wait(farmSpeed) do
         local player = game.Players.LocalPlayer
         local character = player.Character
         if not character or not character:FindFirstChild("HumanoidRootPart") then
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Lỗi",
-                Text = "Không tìm thấy nhân vật!",
-                Duration = 5
-            })
             autoFarmLevelEnabled = false
+            game.StarterGui:SetCore("SendNotification", {Title = "Lỗi", Text = "Không tìm thấy nhân vật!", Duration = 5})
             return
         end
-        
         local enemy = findNearestEnemy()
         if enemy then
             local rootPart = character.HumanoidRootPart
             local enemyPos = enemy.HumanoidRootPart.Position
-            
-            -- Dịch chuyển đến quái
             rootPart.CFrame = CFrame.new(enemyPos + Vector3.new(0, 5, 0), enemyPos)
-            
-            -- Giả lập tấn công (tùy game, có thể cần gọi RemoteEvent)
             game:GetService("VirtualUser"):CaptureController()
             game:GetService("VirtualUser"):ClickButton1(Vector2.new())
-            
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đang tấn công " .. enemy.Name .. "!",
-                Duration = 3
-            })
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đang tấn công " .. enemy.Name .. "!", Duration = 3})
         else
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Không tìm thấy quái để farm!",
-                Duration = 5
-            })
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Không tìm thấy quái!", Duration = 5})
         end
     end
 end
 
--- Hàm auto farm chests
 local function autoFarmChests()
     while autoFarmChestsEnabled and wait(farmSpeed) do
         local player = game.Players.LocalPlayer
         local character = player.Character
         if not character or not character:FindFirstChild("HumanoidRootPart") then
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Lỗi",
-                Text = "Không tìm thấy nhân vật!",
-                Duration = 5
-            })
             autoFarmChestsEnabled = false
+            game.StarterGui:SetCore("SendNotification", {Title = "Lỗi", Text = "Không tìm thấy nhân vật!", Duration = 5})
             return
         end
-        
         local chest = findNearestChest()
         if chest then
             local rootPart = character.HumanoidRootPart
             local chestPos = chest.Position
-            
-            -- Dịch chuyển đến chest
             rootPart.CFrame = CFrame.new(chestPos + Vector3.new(0, 5, 0), chestPos)
-            
-            -- Giả lập thu thập (tùy game, có thể cần gọi RemoteEvent)
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đã thu thập " .. chest.Name .. "!",
-                Duration = 3
-            })
-            
-            -- Chest thường tự động biến mất sau khi thu thập trong Blox Fruits
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã thu thập " .. chest.Name .. "!", Duration = 3})
         else
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Không tìm thấy chest để farm!",
-                Duration = 5
-            })
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Không tìm thấy chest!", Duration = 5})
         end
     end
 end
 
--- Toggle Auto Farm Level
 Library:AddToggle(Tab8o, {
     Name = "Auto Farm Level 🌟",
     Default = false,
     Callback = function(state)
         autoFarmLevelEnabled = state
         if state then
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đã bật Auto Farm Level!",
-                Duration = 5
-            })
-            spawn(autoFarmLevel) -- Chạy auto farm trong một luồng riêng
+            spawn(autoFarmLevel)
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã bật Auto Farm Level!", Duration = 5})
         else
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đã tắt Auto Farm Level!",
-                Duration = 5
-            })
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã tắt Auto Farm Level!", Duration = 5})
         end
     end
 })
 
--- Toggle Auto Farm Chests
 Library:AddToggle(Tab8o, {
     Name = "Auto Farm Chests 💰",
     Default = false,
     Callback = function(state)
         autoFarmChestsEnabled = state
         if state then
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đã bật Auto Farm Chests!",
-                Duration = 5
-            })
-            spawn(autoFarmChests) -- Chạy auto farm trong một luồng riêng
+            spawn(autoFarmChests)
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã bật Auto Farm Chests!", Duration = 5})
         else
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Auto Farm",
-                Text = "Đã tắt Auto Farm Chests!",
-                Duration = 5
-            })
+            game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã tắt Auto Farm Chests!", Duration = 5})
         end
     end
 })
 
--- Dropdown chọn loại farm
 Library:AddDropdown(Tab8o, {
     Name = "Chọn loại farm 🌾",
     Default = "Level",
     Options = {"Level", "Chests"},
     Callback = function(value)
         farmType = value
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Auto Farm",
-            Text = "Đã chọn loại farm: " .. value .. "!",
-            Duration = 5
-        })
+        game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Đã chọn loại farm: " .. value .. "!", Duration = 5})
     end
 })
 
--- Thay dropdown "Tốc độ farm ⏩" bằng slider
 Library:AddSlider(Tab8o, {
     Name = "Tốc độ farm ⏩ [giây]",
     Min = 0.1,
@@ -667,10 +513,6 @@ Library:AddSlider(Tab8o, {
     Default = 0.5,
     Callback = function(value)
         farmSpeed = value
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Auto Farm",
-            Text = "Tốc độ farm: " .. tostring(value) .. " giây!",
-            Duration = 5
-        })
+        game.StarterGui:SetCore("SendNotification", {Title = "Auto Farm", Text = "Tốc độ farm: " .. tostring(value) .. " giây!", Duration = 5})
     end
 })
