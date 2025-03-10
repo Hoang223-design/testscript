@@ -1,5 +1,7 @@
+-- Tải GUI từ link đã cung cấp
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hoang223-design/testGUI1/refs/heads/main/TestGUI1.lua"))()
 
+-- Tạo cửa sổ chính
 local Window = Library:MakeWindow({
     Hub = {
         Title = "Hoàng Hub",
@@ -20,9 +22,10 @@ local Window = Library:MakeWindow({
     }
 })
 
+-- Nút Minimize và Close (đã được điều chỉnh kích thước trong RedzHubGUI.lua)
 Library:MinimizeButton({
     Image = "http://www.roblox.com/asset/?id=136495663671275",
-    Size = {25, 25},
+    Size = {30, 30}, -- Đặt kích thước 30x30 để giống Redz Hub
     Color = Color3.fromRGB(70, 20, 20), -- Màu đỏ đậm giống Redz Hub
     Corner = true,
     Stroke = false,
@@ -656,16 +659,17 @@ Library:AddDropdown(Tab8o, {
     end
 })
 
--- Dropdown chọn tốc độ farm
-Library:AddDropdown(Tab8o, {
-    Name = "Tốc độ farm ⏩",
-    Default = "0.5 giây",
-    Options = {"0.1 giây", "0.3 giây", "0.5 giây", "1 giây"},
+-- Thay dropdown "Tốc độ farm ⏩" bằng slider
+Library:AddSlider(Tab8o, {
+    Name = "Tốc độ farm ⏩ [giây]",
+    Min = 0.1,
+    Max = 1,
+    Default = 0.5,
     Callback = function(value)
-        farmSpeed = tonumber(value:match("([%d.]+)"))
+        farmSpeed = value
         game.StarterGui:SetCore("SendNotification", {
             Title = "Auto Farm",
-            Text = "Tốc độ farm: " .. value .. "!",
+            Text = "Tốc độ farm: " .. tostring(value) .. " giây!",
             Duration = 5
         })
     end
