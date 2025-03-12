@@ -31,11 +31,8 @@ MinimizeButton({
 
 local Tab1o = MakeTab({Name = "Nhạc🥁🎷"})
 local Tab2o = MakeTab({Name = "Main👉🏻👈🏻"})
-local Tab3o = MakeTab({Name = "Trái cây/raid🤤🍑"})
-local Tab4o = MakeTab({Name = "Pvp🥵"})
-local Tab5o = MakeTab({Name = "Khác☘️"})
-local Tab6o = MakeTab({Name = "Dịch Chuyển🛸"})
-local Tab7o = MakeTab({Name = "Server🌐"})
+local Tab3o = MakeTab({Name = " giảm lag v1"})
+local Tab4o = MakeTab({Name = "Server🌐"})
 
 -- Tab Nhạc (giữ nguyên)
 AddToggle(Tab1o, {
@@ -86,7 +83,7 @@ AddButton(Tab2o, {
 })
 
 -- Tab Khác (giữ nguyên)
-AddButton(Tab5o, {
+AddButton(Tab3o, {
     Name = "dành cho máy yếu💥 x3",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
@@ -165,21 +162,21 @@ local function FindLowPlayerServer()
     end
 end
 
-AddButton(Tab7o, {
+AddButton(Tab4o, {
     Name = "🔄 Rejoin Server",
     Callback = function()
         RejoinServer()
     end
 })
 
-AddButton(Tab7o, {
+AddButton(Tab4o, {
     Name = "🌍 Chuyển đổi server",
     Callback = function()
         HopServer()
     end
 })
 
-AddButton(Tab7o, {
+AddButton(Tab4o, {
     Name = "👥 Tìm Server Ít Người",
     Callback = function()
         FindLowPlayerServer()
